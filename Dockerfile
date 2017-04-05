@@ -22,7 +22,7 @@ RUN apk --no-cache add c-ares libevent yaml python \
  && rm -f /etc/pgbouncer/pgbouncer.ini \
  && apk del build-dependencies
 
-COPY ./templates/* /templates
+COPY ./templates/* /templates/
 
 RUN chown -R pgbouncer /etc/pgbouncer && chown -R pgbouncer /templates
 
