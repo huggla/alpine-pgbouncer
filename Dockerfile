@@ -14,6 +14,7 @@ RUN apk --no-cache add c-ares libevent yaml python \
  && cp etc/userlist.txt /etc/pgbouncer/ \
  && adduser -D -S pgbouncer \
  && chown pgbouncer /var/run/pgbouncer \
+ && pip install --upgrade pip \
  && pip install jinja2 \
  && mkdir -p /templates \
  && cd /tmp \
