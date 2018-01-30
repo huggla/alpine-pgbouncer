@@ -14,25 +14,27 @@ RUN apk --no-cache add c-ares libevent yaml python \
  && cp etc/userlist.txt /etc/pgbouncer/ \
  && adduser -D -S pgbouncer \
  && chown pgbouncer /var/run/pgbouncer \
- && pip install --upgrade pip \
- && pip install jinja2 \
- && mkdir -p /templates \
- && cd /tmp \
+# && pip install --upgrade pip \
+# && pip install jinja2 \
+# && mkdir -p /templates \
+# && cd /tmp \
  && rm -rf /tmp/pgbouncer* \
- && rm -f /etc/pgbouncer/pgbouncer.ini \
+# && rm -f /etc/pgbouncer/pgbouncer.ini \
  && apk del build-dependencies
 
-COPY ./templates/* /templates/
+#COPY ./templates/* /templates/
 
-RUN chown -R pgbouncer /etc/pgbouncer && chown -R pgbouncer /templates
+#RUN chown -R pgbouncer /etc/pgbouncer && chown -R pgbouncer /templates
+RUN chown -R pgbouncer /etc/pgbouncer
 
-COPY ./bin/start.sh /start.sh
-COPY ./bin/generate_config.py /generate_config.py
+
+#COPY ./bin/start.sh /start.sh
+#COPY ./bin/generate_config.py /generate_config.py
 
 USER pgbouncer
 
-VOLUME /etc/pgbouncer
+#VOLUME /etc/pgbouncer
 
-EXPOSE 6432
+#EXPOSE 6432
 
-CMD /start.sh
+CMD ["pgbouncer", "/etc/pgbouncer/pgbouncer.ini"] 
