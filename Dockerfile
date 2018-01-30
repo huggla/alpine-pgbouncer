@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.7
 
 RUN apk --no-cache add c-ares libevent yaml python \
  && apk --no-cache add --virtual build-dependencies autoconf autoconf-doc automake c-ares-dev curl gcc libc-dev libevent-dev libtool make man openssl-dev pkgconfig py-pip sqlite-dev \
