@@ -1,6 +1,6 @@
 FROM alpine:3.7
 
-RUN apk --no-cache add c-ares libevent yaml python \
+RUN apk --no-cache add c-ares libevent yaml python libssl1.0 \
  && apk --no-cache add --virtual build-dependencies autoconf autoconf-doc automake c-ares-dev curl gcc libc-dev libevent-dev libtool make man openssl-dev pkgconfig py-pip sqlite-dev \
  && curl -o  /tmp/pgbouncer-1.7.2.tar.gz -L https://pgbouncer.github.io/downloads/files/1.7.2/pgbouncer-1.7.2.tar.gz \
  && cd /tmp \
