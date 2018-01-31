@@ -1,12 +1,13 @@
 FROM alpine:3.7
 
-RUN apk --no-cache add c-ares libevent yaml python libssl1.0 \
- && apk --no-cache add --virtual build-dependencies autoconf autoconf-doc automake c-ares-dev curl gcc libc-dev libevent-dev libtool make man openssl-dev pkgconfig py-pip sqlite-dev \
- && curl -o  /tmp/pgbouncer-1.7.2.tar.gz -L https://pgbouncer.github.io/downloads/files/1.7.2/pgbouncer-1.7.2.tar.gz \
+RUN \
+#apk --no-cache add libevent libssl1.0 \
+ apk --no-cache add --virtual build-dependencies make libevent-dev openssl-dev gcc libc-dev  \
+ && wget -O /tmp/pgbouncer-1.8.1.tar.gz https://pgbouncer.github.io/downloads/files/1.8.1/pgbouncer-1.8.1.tar.gz \
  && cd /tmp \
- && tar xvfz /tmp/pgbouncer-1.7.2.tar.gz \
- && cd pgbouncer-1.7.2 \
- && ./configure --prefix=/usr \
+ && tar xvfz /tmp/pgbouncer-1.8.1.tar.gz \
+ && cd pgbouncer-1.8.1 \
+ && ./configure --prefix=/usr/local --with-libevent=libevent-prefix \
  && make \
  && cp pgbouncer /usr/bin \
  && mkdir -p /etc/pgbouncer /var/log/pgbouncer /var/run/pgbouncer \
